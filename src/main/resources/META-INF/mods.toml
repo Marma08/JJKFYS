@@ -1,0 +1,54 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="jjkfys"
+version="1.1.1-1.20.1"
+displayName="JJKFYS"
+authors="Marma"
+
+description='''
+Fixes for JujutsuCraft Addon:
+- Fix skill tree gamerule blocking stats
+- Fix HP cap not working
+- Fix HP GameRule
+- Fix power capacity
+- Fix Ultimates
+- Fix Advancements depencensy
+- Added rebirth limit gamerule
+- Added power command
+- Added awakening balance commands
+- Added uv and brain damage balance commands
+'''
+
+[[dependencies.jjkfys]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.jjkfys]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.jjkfys]]
+modId="jujutsucraft"
+mandatory=true
+versionRange="[49,)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.jjkfys]]
+modId="jujutsucraftaddon"
+mandatory=true
+versionRange="[7,)"
+ordering="AFTER"
+side="BOTH"
+
+[[mixins]]
+config = "jjkfys.mixins.json"

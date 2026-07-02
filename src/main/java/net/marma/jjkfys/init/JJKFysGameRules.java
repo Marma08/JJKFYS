@@ -1,0 +1,38 @@
+package net.marma.jjkfys.init;
+
+import net.minecraft.world.level.GameRules;
+
+public class JJKFysGameRules {
+
+    public static GameRules.Key<GameRules.IntegerValue> MAX_REBIRTHS;
+    public static GameRules.Key<GameRules.IntegerValue> GOJO_UV_DURATION_TICKS;
+    public static GameRules.Key<GameRules.IntegerValue> GOJO_BRAIN_DAMAGE_DURATION_TICKS;
+    public static GameRules.Key<GameRules.BooleanValue> DISABLE_DOMAIN_MASTERY;
+
+    public static void register() {
+
+        MAX_REBIRTHS = GameRules.register(
+                "jjkfysMaxRebirths",
+                GameRules.Category.PLAYER,
+                GameRules.IntegerValue.create(3)
+        );
+
+        GOJO_UV_DURATION_TICKS = GameRules.register(
+                "jjkfysGojoUvDurationTicks",
+                GameRules.Category.PLAYER,
+                GameRules.IntegerValue.create(100)
+        );
+
+        GOJO_BRAIN_DAMAGE_DURATION_TICKS = GameRules.register(
+                "jjkfysGojoBrainDamageDurationTicks",
+                GameRules.Category.PLAYER,
+                GameRules.IntegerValue.create(6000)
+        );
+
+        DISABLE_DOMAIN_MASTERY = GameRules.register(
+                "jjkfysDisableDomainMastery",
+                GameRules.Category.PLAYER,
+                GameRules.BooleanValue.create(false)
+        );
+    }
+}

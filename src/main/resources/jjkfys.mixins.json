@@ -1,0 +1,46 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.marma.jjkfys.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "jjkfys.refmap.json",
+  "mixins": [
+    "SkillTreeSPButtonFixMixin",
+    "MobEffectInstanceAccessor",
+    "UltimateReleaseMixin",
+    "UltimateUnlockMixin",
+    "UltimatesProcedureMixin",
+    "RebirthLimitMixin",
+    "RebirthMaxLevelMixin",
+    "AITrueSphereMixin",
+    "RebirthHealthMixin",
+    "GetoReleaseMixin",
+    "DisableDagonCloneDuplicationMixin",
+    "CursedSpiritRctKeyMixin",
+    "CursedSpiritRctTickMixin",
+    "SkillTreeMessageAccessor",
+    "HigurumaSmallGavelBarrageMixin",
+    "HigurumaSmallGavelAttackContinueMixin",
+    "HigurumaLegacyOverheadMixin",
+    "HigurumaExecutionerSwordGavelCycleMixin",
+    "HigurumaExecutionerSwordHandGuardMixin",
+    "GlobalLegacyOverheadBehaviorMixin",
+    "LegacySlashCooldownMixin",
+    "KaoriSkillRouteMixin",
+    "GojoDomainTimingMixin",
+    "GojoDomainCloseTimingMixin",
+    "JjkuBrainDamageTimingMixin",
+    "AwakeningChargeBonusMixin",
+    "GojoAwakeningChargeTickMixin",
+    "AwakeningOutputAttackEntityMixin",
+    "DomainMasteryTypeKeyMixin",
+    "DomainMasteryApplicationMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
