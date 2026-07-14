@@ -3,15 +3,14 @@ package net.marma.jjkfys.mixin;
 import net.mcreator.jujutsucraft.init.JujutsucraftModItems;
 import net.mcreator.jujutsucraft.network.JujutsucraftModVariables;
 import net.mcreator.jujutsucraft.procedures.AttackContinueProcedure;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(AttackContinueProcedure.class)
@@ -32,27 +31,45 @@ public class HigurumaSmallGavelAttackContinueMixin {
             return;
         }
 
-        LivingEntity living = (LivingEntity) entity;
-        ItemStack mainHand = living.getMainHandItem().copy();
-        ItemStack offHand = living.getOffhandItem().copy();
         entity.getPersistentData().putBoolean(BYPASS_KEY, true);
+    }
 
-        try {
-            living.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
-            living.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);
-            AttackContinueProcedure.execute(world, x, y, z, entity);
-        } finally {
-            living.setItemInHand(InteractionHand.MAIN_HAND, mainHand);
-            living.setItemInHand(InteractionHand.OFF_HAND, offHand);
-
-            if (living instanceof Player player) {
-                player.getInventory().setChanged();
-            }
-
+    @Inject(method = "execute", at = @At("RETURN"), remap = false)
+    private static void jjkfys$clearSmallGavelBarrageMarker(
+            LevelAccessor world,
+            double x,
+            double y,
+            double z,
+            Entity entity,
+            CallbackInfo ci
+    ) {
+        if (entity != null) {
             entity.getPersistentData().remove(BYPASS_KEY);
         }
+    }
 
-        ci.cancel();
+    @Redirect(
+            method = "execute",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/Entity;onGround()Z"
+            )
+    )
+    private static boolean jjkfys$skipSmallGavelOverheadBranch(
+            Entity checked,
+            LevelAccessor world,
+            double x,
+            double y,
+            double z,
+            Entity entity
+    ) {
+        if (checked == entity
+                && entity != null
+                && entity.getPersistentData().getBoolean(BYPASS_KEY)) {
+            return false;
+        }
+
+        return checked.onGround();
     }
 
     private static boolean shouldUseGenericPath(Entity entity) {
