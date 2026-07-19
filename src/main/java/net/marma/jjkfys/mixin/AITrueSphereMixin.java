@@ -1,5 +1,7 @@
 package net.marma.jjkfys.mixin;
 
+import net.marma.jjkfys.init.JJKFysGameRules;
+
 import net.mcreator.jujutsucraft.procedures.AITrueSphereProcedure;
 
 import net.minecraft.world.entity.Entity;
@@ -90,8 +92,25 @@ public class AITrueSphereMixin {
 
                 if (attack && !wasAttacking) {
 
-                    entity.getPersistentData()
-                            .putDouble("cnt_x", 199.0D);
+                    double move =
+                            entity.getPersistentData()
+                                    .getDouble("move");
+
+                    if (move == 0.0D) {
+
+                        double charge =
+                                entity.getPersistentData()
+                                        .getDouble("cnt_x");
+
+                        entity.getPersistentData()
+                                .putDouble(
+                                        "cnt_x",
+                                        Math.max(
+                                                charge,
+                                                jjkfys$attackCharge(level)
+                                        )
+                                );
+                    }
 
                     entity.getPersistentData()
                             .putBoolean(
@@ -112,5 +131,13 @@ public class AITrueSphereMixin {
                 break;
             }
         }
+    }
+
+    private static double jjkfys$attackCharge(Level level) {
+
+        int configured = level.getGameRules()
+                .getInt(JJKFysGameRules.YOROZU_TRUE_SPHERE_ATTACK_CHARGE);
+
+        return Math.max(0, Math.min(199, configured));
     }
 }
