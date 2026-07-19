@@ -8,6 +8,8 @@ public class JJKFysGameRules {
     public static GameRules.Key<GameRules.IntegerValue> GOJO_UV_DURATION_TICKS;
     public static GameRules.Key<GameRules.IntegerValue> GOJO_BRAIN_DAMAGE_DURATION_TICKS;
     public static GameRules.Key<GameRules.BooleanValue> DISABLE_DOMAIN_MASTERY;
+    public static GameRules.Key<GameRules.IntegerValue> YOROZU_TRUE_SPHERE_ATTACK_CHARGE;
+    public static GameRules.Key<GameRules.BooleanValue> PREVENT_WORLD_CUT_RESISTANCE_REMOVAL;
 
     public static void register() {
 
@@ -33,6 +35,18 @@ public class JJKFysGameRules {
                 "jjkfysDisableDomainMastery",
                 GameRules.Category.PLAYER,
                 GameRules.BooleanValue.create(false)
+        );
+
+        YOROZU_TRUE_SPHERE_ATTACK_CHARGE = GameRules.register(
+                "jjkfysYorozuTrueSphereAttackCharge",
+                GameRules.Category.PLAYER,
+                GameRules.IntegerValue.create(188)
+        );
+
+        PREVENT_WORLD_CUT_RESISTANCE_REMOVAL = GameRules.register(
+                "jjkfysPreventWorldCutResistanceRemoval",
+                GameRules.Category.PLAYER,
+                GameRules.BooleanValue.create(true)
         );
     }
 }
